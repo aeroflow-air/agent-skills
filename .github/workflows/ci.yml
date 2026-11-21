@@ -1,0 +1,39 @@
+# Lints skills (ADR-0023): frontmatter, line limits, sections, and that every
+# example link resolves. Stdlib Python, no dependencies.
+#
+# Org GITHUB_TOKEN is read-only by default; permissions stay explicit.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "17 6 * * 1" # weekly: example links rot when code moves
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint skills and check links
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/check_skills.py --links
+
+      # ADR-0023 names `gh skill publish --dry-run`. gh skill is in preview, so
+      # this step is advisory and never fails the build. It publishes nothing.
+      - name: Agent Skills spec check (advisory, gh skill preview)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh skill publish --dry-run || echo "::warning::gh skill publish --dry-run reported issues (advisory)"
