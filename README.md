@@ -20,12 +20,20 @@ that's Claude Code, Copilot, Grok Bot, Codex or a person. No tool-specific featu
 
 ## Skills
 
-The list is added in the first skills PR. `default-set.txt` names the skills the service template pulls in.
+| Skill | Use when |
+|-------|----------|
+| [aeroflow-add-endpoint](skills/aeroflow-add-endpoint/SKILL.md) | Adding or changing an HTTP route (controllers, `Result` → ProblemDetails) |
+| [aeroflow-add-queue-consumer](skills/aeroflow-add-queue-consumer/SKILL.md) | Reacting to another topic; idempotent handler, outbox, contract tests |
+| [aeroflow-add-otel-tracing](skills/aeroflow-add-otel-tracing/SKILL.md) | Wiring ServiceDefaults, business events (10,000+), spans, health, log tests |
+| [aeroflow-write-decision-record](skills/aeroflow-write-decision-record/SKILL.md) | Proposing, accepting or superseding an ADR |
+| [aeroflow-new-service-checklist](skills/aeroflow-new-service-checklist/SKILL.md) | Creating a `svc-*` from the template |
+
+All five are in the default set ([default-set.txt](default-set.txt)) that the service template will pull in.
 
 ## Layout
 
 ```
-skills/<name>/SKILL.md   one skill: frontmatter (name, description), When to use, Steps, Example
+skills/<name>/SKILL.md   one skill: frontmatter (name, description, license), When to use, Steps, Example
 default-set.txt          skills a repo gets with `skills: default`
 scripts/check_skills.py  the CI lint (stdlib Python)
 ```
