@@ -1,0 +1,7 @@
+# Skills a repo gets with `skills: default` in .agent-skills.yaml (ADR-0023).
+# One folder name per line. Exclude any in the consuming repo's `exclude:` list.
+aeroflow-add-endpoint
+aeroflow-add-queue-consumer
+aeroflow-add-otel-tracing
+aeroflow-write-decision-record
+aeroflow-new-service-checklist
