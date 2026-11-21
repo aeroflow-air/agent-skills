@@ -4,6 +4,10 @@ All notable changes to the skills. Versions follow SemVer (see the README).
 
 ## Unreleased
 
+Nothing yet.
+
+## v0.2.0 (2026-11-21)
+
 - `aeroflow-new-service-checklist`: step 10 turns on secret scanning and push protection, because repos created
   from a template don't copy its security settings.
 - README: how a repo consumes a release with `.agent-skills.yaml` and `sync-agent-skills.yml`.
