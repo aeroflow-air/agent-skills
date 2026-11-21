@@ -59,21 +59,40 @@ SemVer tags (`vMAJOR.MINOR.PATCH`) and GitHub Releases, the same habit as `aerof
 
 Record each change in [CHANGELOG.md](CHANGELOG.md) under *Unreleased*.
 
-## Consuming (from ADR-0023, not built yet)
+## Consuming
 
-A repo pins a version in `.agent-skills.yaml`:
+A repo pins a release in `.agent-skills.yaml` and keeps a copy in `.claude/skills/`:
 
 ```yaml
-source: aeroflow-air/agent-skills
-version: v0.1.0
-skills: default          # or an explicit list
-exclude: []              # platform skills this repo replaces with its own
+# .agent-skills.yaml
+source: aeroflow-air/agent-skills   # optional, the default
+version: v0.1.0                     # release tag
+skills: default                     # default-set.txt of that release, or a list
+exclude: []                         # platform skills this repo replaces with its own
 ```
 
-A reusable `sync-agent-skills.yml` in `aeroflow-workflows` will copy `skills/aeroflow-*` at that tag into
-`.claude/skills/`, fail PRs on drift and open bump PRs. The sync owns only `aeroflow-*` folders. A squad's
-own skills use any other name. By hand, `gh skill install aeroflow-air/agent-skills <skill> --pin <tag>`
-does the same job (gh skill is in preview).
+`sync-agent-skills.yml` in `aeroflow-workflows` checks the copy on every PR and opens bump PRs when a new release
+comes out. It manages only `aeroflow-*` folders, and a squad's own skills use any other name. It's proposed for
+aeroflow-workflows `v0.7.0` ([PR #16](https://github.com/aeroflow-air/aeroflow-workflows/pull/16)). The caller
+example is in the
+[aeroflow-workflows README](https://github.com/aeroflow-air/aeroflow-workflows#agent-skills-sync-adr-0023):
+
+```yaml
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    uses: aeroflow-air/aeroflow-workflows/.github/workflows/sync-agent-skills.yml@v0.7.0
+    with: { mode: check, workflows_ref: v0.7.0 }
+    permissions: { contents: read }
+  bump:   # on schedule / workflow_dispatch
+    if: github.event_name != 'pull_request'
+    uses: aeroflow-air/aeroflow-workflows/.github/workflows/sync-agent-skills.yml@v0.7.0
+    with: { mode: bump, workflows_ref: v0.7.0 }
+    permissions: { contents: write, pull-requests: write }
+```
+
+By hand, `gh skill install aeroflow-air/agent-skills <skill> --pin <tag> --agent claude-code` does the same job
+(gh skill is in preview).
 
 ## CI
 

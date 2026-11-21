@@ -32,8 +32,11 @@ license: MIT
 8. **Events.** Publish only to `<capability>-events`, with canonical examples in `contracts/<topic>/`.
 9. **Docs.** Write `docs/service.md` from the handbook's `templates/service-doc.md`, and rewrite the repo's agent
    file (`CLAUDE.md` today, `AGENTS.md` after the ADR-0023 rollout) for this service's domain and topics.
-10. **Repo settings.** Protect `main` with the required check `build-and-test / build-and-test`, enforced for
-   admins, and no force pushes. Add the service to the org profile README and, if it joins the event flow, to the airport overview.
+10. **Repo settings.** A repo created from a template doesn't copy the template's security settings, so turn on
+   secret scanning and push protection yourself
+   (`gh repo edit --enable-secret-scanning --enable-secret-scanning-push-protection`). Protect `main` with the
+   required check `build-and-test / build-and-test`, enforced for admins, and no force pushes. Add the service to the
+   org profile README and, if it joins the event flow, to the airport overview.
 
 ## Example
 - Template: [README](https://github.com/aeroflow-air/template-dotnet-service/blob/main/README.md), [Program.cs](https://github.com/aeroflow-air/template-dotnet-service/blob/main/src/AeroFlow.ServiceTemplate/Program.cs)

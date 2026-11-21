@@ -1,8 +1,14 @@
 # Changelog
 
-All notable changes to the skills. Versions follow SemVer (see the README). Nothing is tagged yet.
+All notable changes to the skills. Versions follow SemVer (see the README).
 
 ## Unreleased
+
+- `aeroflow-new-service-checklist`: step 10 turns on secret scanning and push protection, because repos created
+  from a template don't copy its security settings.
+- README: how a repo consumes a release with `.agent-skills.yaml` and `sync-agent-skills.yml`.
+
+## v0.1.0 (2026-11-21)
 
 - Starter skills: `aeroflow-add-endpoint`, `aeroflow-add-queue-consumer`, `aeroflow-add-otel-tracing`,
   `aeroflow-write-decision-record`, `aeroflow-new-service-checklist`, and `default-set.txt`.
