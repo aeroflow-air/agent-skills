@@ -4,7 +4,11 @@ All notable changes to the skills. Versions follow SemVer (see the README).
 
 ## Unreleased
 
-Nothing yet.
+Proposed v0.2.1 (patch: a clarification inside an existing step, no new step or rule).
+
+
+- `aeroflow-new-service-checklist`: step 6 replaces the template's placeholder `Domain/CheckInWindow.cs` and keeps
+  `Domain/` non-empty with a namespace matching the folder, because the template's `DomainPurityTests` require both.
 
 ## v0.2.0 (2026-11-21)
 
