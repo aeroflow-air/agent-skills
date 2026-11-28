@@ -1,0 +1,21 @@
+# Backstage catalogue entry for this repo (ADR-0024, platform-handbook#123).
+# Discovered by the aeroflow-air Backstage instance (aeroflow-air/backstage).
+# Domains, Systems and the event-bus Resource live in platform-handbook/catalog/.
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: agent-skills
+  title: Agent skills
+  description: >-
+    Versioned agent skills for AeroFlow repos, one SKILL.md per task
+    (ADR-0023), synced into service repos by aeroflow-workflows.
+  annotations:
+    github.com/project-slug: aeroflow-air/agent-skills
+  tags:
+    - ai
+    - documentation
+spec:
+  type: library
+  lifecycle: experimental
+  owner: group:platform
+  system: developer-platform
